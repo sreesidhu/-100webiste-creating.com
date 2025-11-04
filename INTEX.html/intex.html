@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>₹100 Website Offer | Futuristic AI Design</title>
+  <style>
+    /* === GLOBAL STYLES === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      color: #e0f7ff;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #001a33, #000814);
+      overflow-x: hidden;
+      height: 100vh;
+    }
+
+    /* === PARTICLE BACKGROUND === */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    /* === CONTAINER === */
+    .container {
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 0 0 20px cyan;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    h2 {
+      margin-top: 10px;
+      font-weight: 400;
+      font-size: 1.3em;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeIn 1.5s ease forwards 0.3s;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 60px;
+    }
+
+    .card {
+      background: rgba(0, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 25px;
+      width: 280px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .card:hover {
+      box-shadow: 0 0 25px cyan;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* === CONTACT SECTION === */
+    .contact {
+      margin-top: 80px;
+      padding: 40px;
+      background: rgba(0, 255, 255, 0.07);
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .contact h3 {
+      font-size: 1.8em;
+      text-shadow: 0 0 15px cyan;
+    }
+
+    .contact p {
+      margin: 15px 0;
+      font-size: 1.1em;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border: 2px solid cyan;
+      border-radius: 10px;
+      color: cyan;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: cyan;
+      color: #001a33;
+      box-shadow: 0 0 25px cyan;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="container">
+    <h1>Get Your Professional Website for ₹100</h1>
+    <h2>Built by a student using own skills + AI  | Fast, Clean & Affordable</h2>
+
+    <div class="features">
+      <div class="card"><h3> Professional Look</h3><p>Clean, modern design that impresses your audience instantly.</p></div>
+      <div class="card"><h3> Built with Skill</h3><p>Coded from scratch using HTML, CSS & JS — no templates.</p></div>
+      <div class="card"><h3> Futuristic Feel</h3><p>AI-inspired animations and glowing effects that attract attention.</p></div>
+      <div class="card"><h3> Only ₹100</h3><p>Perfect for students and startups looking for a professional site.</p></div>
+    </div>
+
+    <div class="contact">
+      <h3>Contact & Payment</h3>
+      <p> WhatsApp: <b>+91 7358489229</b></p>
+      <p> Email: <b>sidhusree937@gmail.com</b></p>
+      <p> Payment Methods Accepted:</p>
+      <p>UPI | Paytm | Google Pay | PayPal | Crypto (BTC, ETH, USDT)</p>
+      <a href="https://web.whatsapp.com/" class="btn">Message Me to Start </a>
+    </div>
+  </div>
+
+  <script>
+    // === PARTICLE BACKGROUND ===
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0, 255, 255, 0.6)";
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particles = [];
+      const count = Math.min(window.innerWidth / 10, 150);
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+  </script>
+</body>
+</html>
